@@ -1,0 +1,13 @@
+
+{%extends 'index.html'%}
+
+{% block title%} first page {%endblock%}
+
+
+{%block content%}
+    <h1> welcome to this web page . You are in first page . click home to go homepage , and about to go about page</h1>
+
+    {% load static%}
+   <img src="{% static 'images/bird2.jpg' %}" alt="bird pic" />
+
+  {%endblock content%}

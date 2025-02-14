@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Page</title>
+ </head>
+ <body>
+    <h1> Welcome to Home page </h1>
+    <h3><a href='/'>Main page</h3>
+    <h3><a href = '/aboutpage/about/'>about page</a></h3>
+
+
+
+
+
+    <h1>length</h1>
+    <h3> variable : {{variable}}</h3>
+    <h3> variable length : {{ variable | length }}</h3>
+    <h1>add </h1>
+    <h3>value : {{value}}</h3>
+    <h3>value adding 6 : {{ value | add:"6" }}</h3>
+
+    <h3>add : {{lst | add:",4, 5, 6]"}}</h3>
+
+    <h1>addslashes</h1>
+    <h3> author : {{author}} </h3>
+    <h3> author addslashes  : {{ author | addslashes }} </h3>
+    <h1> capfirst </h1>
+    <h3> variable   : {{ variable | capfirst }} </h3>
+    <h1> center </h1>
+    <h3> variable   : "{{ variable | center:"30" }}" </h3>
+    <h1> cut </h1>
+    <h3> line 'space' cut  : "{{ line | cut:" " }}" </h3>
+    <h3> line cut 't'  : "{{ line | cut:"t" }}" </h3>
+
+    <h1>Datetime</h1>
+    <h3>Date time: {{ date | date:"D d M Y" }}</h3>
+    <h3>Date time: {{ date | date:"D d M Y H:i:s" }}</h3>
+    
+    <h1>Is empty </h1>
+    <h3>text : {{ text | default:"There is no text" }}</h3>
+
+    <h1> sort </h1>
+    <h3> after sorting </h3>
+    <h3>{{ dd | dictsort:"age" }}</h3>
+
+    <h1>divisibleby</h1>
+    <h3> {{ value | divisibleby:"5" }}</h3>
+
+    <h1>Join </h1>
+    <h3> {{ variable | join:" + " }}</h3>
+
+    <h1>first and last character </h1>
+    <h3> first : {{ variable | first }}</h3>
+    <h3> last : {{ variable | last }}</h3>
+
+    <h1>line number </h1>
+    <h3> number of line in : {{ multiline | linenumbers }}</h3>
+
+    <h1> lower , upper and wordcount </h1>
+    <h3> {{line}} </h3>
+    <h3> lower of line : {{line | lower}} </h3>
+    <h3> upper of line : {{line | upper}} </h3>
+    <h3> wordcount of line : {{line | wordcount}} </h3>
+
+
+    <h1> time since</h1>
+    <h3>{{ blog_date | timesince:comment_date }}</h3>
+
+    <h3>{{ line | slugify }}</h3>
+    <h3>random char : {{ line | random }}</h3>
+    <h3>random data from list : {{dd | random}}</h3>
+    <h3>{{ variable | make_list }} </h3>
+
+   
+    <h3>Escaped: {{ "This <em>should be</em> fun!" | escape }}</h3>
+
+    <h3> title : {{'Django rest framework' | title}} </h3>
+
+   <h1>truncatechars and truncatewords</h1>
+   <h3> cut after 10 char : {{line | truncatechars:10 }}</h3>
+   <h3> cut after 2 words : {{line | truncatewords:2 }}</h3>
+ </body>
+ </html>

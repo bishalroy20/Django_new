@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+
+{% block title%} about page {%endblock%}
+
+
+{%block content%}
+
+    <table class="table table-striped-columns">
+        <tr>
+            <th scope="row">strMeal</th>
+            <th>strMealThumb</th>
+            
+        </tr>
+
+       {% for i in data %} 
+            <tr>
+                <th scope="row">{{ i.strMeal }}</th>
+                <th>
+                    <img src="{{ i.strMealThumb }}" alt="{{ i.strMeal }}" width="100">
+                </th>
+            </tr>
+        {% endfor %} 
+     </table> 
+     
+ 
+
+     {%endblock content%}
