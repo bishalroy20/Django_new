@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class SecondPageConfig(AppConfig):
+class TablePageConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'second_page'
+    name = 'table_page'

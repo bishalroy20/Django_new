@@ -1,5 +1,5 @@
 """
-URL configuration for first_page project.
+URL configuration for musician_directory project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/
@@ -20,6 +20,8 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('second_page/', include('second_page.urls')),
-    path('', views.home),
+    path('', views.home , name='home'),
+    path('delete_author/<int:id>/' ,views.delete_author , name='delete_author'),
+    path('form_author/', include('form_page.urls')),
+    path('form_album/', include('table_page.urls')),
 ]
