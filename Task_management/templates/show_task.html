@@ -1,0 +1,33 @@
+{%extends 'base.html' %}
+
+{%block title%} show task {%endblock title %}
+
+{%block content%}
+<h1>Your Tasks are Listed Here </h1>
+
+<div class="d-flex flex-wrap justify-content-center px-5">
+    {% for post in form %}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h3 class="card-title">{{ post.tasktitle }}</h3>
+            <br>
+            <p class="card-text">{{ post.taskdescription }}</p>
+            <h6 class="card-title">{{ post.task_assign_Date }}</h6>
+            {%for cat in post.categories.all%}
+            <button class="btn btn-warning bt-sm m-2 disabled"> {{cat.Category_name}}</button>
+            {%endfor %}
+        </br>
+            {% if not post.is_completed %}
+                <a href="{%url 'edit_task' post.id%}" class="btn btn-secondary card-link">Edit</a>
+                <a href="{% url 'delete_task' post.id%}" class="btn btn-danger card-link">Delete</a>
+            {% else %}
+                <a href="#" class="btn btn-success card-link ">Completed</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+
+    {%endblock%}
