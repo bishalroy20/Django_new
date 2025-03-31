@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+
+
+<div class="container mt-5">
+  <h2>Musicians and Albums</h2>
+  
+
+
+  <div class="d-flex flex-wrap justify-content-center px-5 pt-5">
+    <table class="table table-bordered">
+      <thead>
+          <tr>
+            <th scope="col"> id</th>
+              <th scope="col">Musician Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Instrument Type</th>
+              <th scope="col">Album Rating</th>
+              <th scope="col">Album Name</th>
+              <th scope="col">Release Date</th>
+              <th scope="col">Actions</th>
+          </tr>
+      </thead>
+      <tbody>
+        {% if request.user.is_authenticated %}
+        {% for musician in data %}
+        <tr>
+            <td>{{ musician.id}}</td>
+            <td><a href="{% url 'edit_author' musician.id %}">{{ musician.First_name }} {{ musician.Last_name }}</a></td>
+            <td>{{ musician.Email }}</td>
+            <td>{{ musician.Instrument_type }}</td>
+            {% for album in dataalbum %}
+                {% if album.musician_id == musician.id %}
+                    <td>{{ album.rating }}</td>
+                    <td>{{ album.album_name }}</td>
+                    <td>{{ album.release_date }}</td>
+                    <td>
+                        <a class='btn btn-danger my-2' href="{% url 'edit_album' album.id %}">Edit</a>
+                    </td>
+                {% endif %}
+            {% endfor %}
+                    <td>
+                        <a class='btn btn-danger my-2' href="{% url 'delete_author' musician.id %}">Delete</a>
+                    </td>
+            
+        </tr>
+        {%endfor%} 
+        
+        {% else %}
+
+        {% for musician in data %}
+        <tr>
+            <td>{{ musician.id}}</td>
+            <td><a>{{ musician.First_name }} {{ musician.Last_name }}</a></td>
+            <td>{{ musician.Email }}</td>
+            <td>{{ musician.Instrument_type }}</td>
+            {% for album in dataalbum %}
+                {% if album.musician_id == musician.id %}
+                    <td>{{ album.rating }}</td>
+                    <td>{{ album.album_name }}</td>
+                    <td>{{ album.release_date }}</td>
+                    
+                {% endif %}
+            {% endfor %}
+
+            
+        </tr>
+        {%endfor%} 
+
+        {%endif%}
+  </table>
+    
+</div>
+
+{% endblock %}
