@@ -1,0 +1,49 @@
+
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+<h1> Car Details page</h1>
+
+
+
+<div class="container d-flex align-items-center" style="gap: 20px;">
+    <!-- Left Side: Car Image -->
+    <div style="flex: 1;">
+        <img src="{{ car.image.url }}" style="width: 100%; max-width: 400px; height: auto; object-fit: cover; border-radius: 10px;" alt="Car Image">
+    </div>
+
+    <!-- Right Side: Car Information -->
+    <div style="flex: 1;">
+        <h2 class="text-primary">🚗 {{ car.name }}</h2>
+        <h4 class="text-secondary">Brand: <span class="text-dark">{{ car.brand_name }}</span></h4>
+        <p class="text-muted"><strong>📝 Description:</strong> {{ car.description }}</p>
+        <h4 class="text-success">💰 Price: ${{ car.price }}</h4>
+        <h4 class="text-danger">📦 Stock: {{ car.quantity }} available</h4>
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'buy_car' car.id %}" class="btn btn-success">Buy Now</a>
+        {% endif %}
+    </div>
+</div>
+
+
+<div class='card m-2'>
+    <div class="card-body m-2">
+        {% for comment in comments%}
+        <h4>{{comment.name}}</h4>
+        <p>{{comment.body}}</p>
+        <p>{{comment.created_on}}</p>{%endfor%}
+    </div>
+
+</div>
+
+
+
+<form method="post" enctype="multipart/form-data" style="width: 40%; min-width: 200px; margin: auto; padding: 10px;">
+    {% csrf_token %}
+    {{ comment_form | crispy }}
+    <button type="submit" class="btn btn-danger mb-3">Submit</button>
+</form>
+
+
+
+{% endblock%}

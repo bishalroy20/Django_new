@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1> home page</h1>
+
+
+{% load static %}
+<div class="container d-flex align-items-center">
+    <div>
+        <p><b>Welcome to AutoSphere</b>, your trusted destination for buying and selling cars effortlessly.
+            Whether you're searching for your dream ride or looking to sell your vehicle at the best price, 
+            we've got you covered. Explore our wide range of listings, compare options, and connect with buyers
+            and sellers with ease. Start your journey with us today and drive away with confidence!</p>
+    </div>
+    <div style="width: 100%; margin: auto; ">
+        <img src="{% static 'image1.png' %}" alt="image"/>
+    </div>
+</div>
+
+
+
+<h4> {{data | length}} results found </h4>
+{% for cat in category %}
+
+
+<input type='button' name="category" id="{{ cat.id }}">
+<label for="{{ cat.id }}">
+  <a href='{% url 'brand_wise_car' cat.slug %}' class='btn btn-primary' >{{ cat.name }}</a>
+</label>
+{% endfor %}
+
+    <div class='d-flex m-3'>
+    {% for car in data %}
+
+    <div class="card" style="width: 18rem;">
+      <img src="{{ car.image.url }}" style="width:100%;" class="card-img-top" alt="image">
+
+        <div class="card-body">
+          <h2 class="text-primary">🚗 {{ car.name }}</h2>
+        <h4 class="text-secondary">Brand: <span class="text-dark">{{ car.brand_name }}</span></h4>
+          
+        <h4 class="text-success">💰 Price: ${{ car.price }}</h4>
+        </div>
+        
+        <div class="card-body">
+          <a href="{% url 'detailview' car.id %}" class="btn btn-primary card-link">Details</a>
+          
+        </div>
+      </div>
+
+    {% endfor %}
+    </div>
+
+
+    {% endblock %}

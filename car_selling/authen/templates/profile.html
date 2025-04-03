@@ -1,0 +1,34 @@
+{%extends 'base.html'%}
+
+{% block content%}
+    {%load crispy_forms_tags%}
+    <h1>{{type}} Page</h1>
+    
+    <h4> want to edit your profile ?? 
+
+        <a href ={% url 'edit_profile'%} class='btn btn-info'>Edit profile</a>
+    </h4>
+    {% comment %} <form method="post" style="width: 40%; min-width: 200px; margin: auto; padding: 10px;">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <button type="submit" class="btn btn-danger mb-3">Submit</button>
+    </form> {% endcomment %}
+    
+    
+
+    {% for purchase in purchases %}
+    <div>
+        <h3>{{ purchase.car.name }}</h3>
+        <img src="{{ purchase.car.image.url }}" style="width: 200px;">
+        <p><strong>Brand:</strong> {{ purchase.car.brand_name }}</p>
+        <p><strong>Price:</strong> ${{ purchase.car.price }}</p>
+        <p><strong>Purchase Date:</strong> {{ purchase.date_purchased }}</p>
+
+        <div class="body">
+            <a href="{% url 'detailview' purchase.car.id %}" class="btn btn-primary card-link">Details</a>
+        </div>
+    </div>
+
+
+    {% endfor %}
+{%endblock %}
