@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Homepage</h1>
+<h4> {{data | length }} results found </h4>
+<div class="container d-flex flex-wrap p-4 bg-light rounded shadow-sm">
+  <!-- Sidebar: Categories -->
+  <div class="col-3">
+    <h5 class="mb-3 text-primary">Categories</h5>
+    {% for cat in category%}
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="Category" id="{{cat.id}}" />
+      <label class="form-check-label" for="{{cat.id}}">
+        
+        <a href="{% url 'category_wise_post' cat.slug %}">{{cat.name}}</a>
+      </label>
+    </div>
+    {%endfor%}
+</div>
+
+
+  <!-- Main Content: Posts -->
+  <div class="col-9 d-flex flex-wrap">
+    {% for post in data %}
+    <div class="col-sm-3 p-2">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title text-primary">{{ post.title }}</h5>
+          <p class="card-text text-secondary">{{ post.content }}</p>
+          <p class="text-muted">
+            Category:
+            {% for cat in post.category.all %}
+            <button class="btn btn-outline-primary btn-sm disabled m-1">{{ cat.name }}</button>
+            {% endfor %}
+          </p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}
+

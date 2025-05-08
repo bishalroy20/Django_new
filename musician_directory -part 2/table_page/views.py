@@ -28,15 +28,3 @@ def edit_album(request, id):
             post_form.save()
             return redirect("home")
     return render(request , 'add_album.html' , {'form': post_form , 'type' : 'Edit '})  
-
-# Album() got unexpected keyword arguments: 'instance'
-# @login_required
-# def edit_album(request, id):
-#     post = Album.objects.get(pk = id)
-#     post_form = Album(instance=post)
-#     if request.method == 'POST':
-#         post_form = Album(request.POST , instance=post)
-#         if post_form.is_valid():
-#             post_form.save()
-#             return redirect("home")
-#     return render(request , 'add_album.html' , {'form': post_form , 'type' : 'Edit Album'})

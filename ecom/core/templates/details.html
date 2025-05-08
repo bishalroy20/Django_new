@@ -1,0 +1,74 @@
+
+{% extends 'base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+<h1 class="font-bold text-3xl text-center pb-5"> Product Details page</h1>
+
+
+<div style="display: flex; gap: 30px; padding: 40px; background-color: #f8f8f8;">
+    <!-- Left Side: Car Image -->
+    <div style="flex: 1; text-align: center; padding: 20px; background: white; border-radius: 10px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);">
+        <img src="{{ object.image.url }}" alt="Car Image" style="width: 100%; max-width: 450px; height: auto; object-fit: cover; border-radius: 10px;">
+    </div>
+
+    <!-- Right Side: Car Information -->
+    <div style="flex: 2; background: white; padding: 30px; border-radius: 10px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);">
+        <h2 style="color: #007BFF; font-weight: bold;">{{ object.name }}</h2>
+        <h4 style="color: #555;">Brand: <span style="color: #222;">{{ object.sport_name }}</span></h4>
+        <p style="color: #777; font-size: 16px;"><strong>📝 Description:</strong> {{ object.description }}</p>
+        <h4 style="color: #28a745; font-weight: bold;">💰 Price: ${{ object.price }}</h4>
+        <h4 style="color: #dc3545;">📦 Stock: {{ object.quantity }} available</h4>
+
+        <!-- Call-to-Action Buttons -->
+        <div style="margin-top: 20px;">
+            {% if request.user.is_authenticated %}
+                
+                <form method="POST" action="{% url 'add_to_cart' product.id %}">
+                    {% csrf_token %}
+                    <button type="submit" style="background-color: #FFD700; color: #333; font-weight: bold; padding: 6px 12px; border-radius: 8px; border: none; cursor: pointer; transition: background 0.3s;">
+                        🛒 Add to Cart
+                    </button>
+                </form>
+                
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Customer Reviews Section -->
+<div style="background: #fff; padding: 30px; margin-top: 40px; border-radius: 10px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);">
+    <h3 style="color: #222;">💬 Customer Reviews</h3>
+    {% for comment in comments %}
+    <div style="border-bottom: 1px solid #ddd; padding: 15px;">
+        <h4 style="color: #007BFF;">{{ comment.name }}</h4>
+        <p style="color: #555;">{{ comment.body }}</p>
+        <small style="color: #777;">📅 {{ comment.created_on }}</small>
+    </div>
+    {% endfor %}
+</div>
+<br/> <br/> <br/>
+<!-- Leave a Review Form -->
+<form method="POST">
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+    {% csrf_token %}
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+        {% for field in comment_form %}
+            <div>
+                <label style="font-weight: bold;">{{ field.label }}</label>
+                {{ field }}
+            </div>
+        {% endfor %}
+    </div>
+
+    <button type="submit" style="background-color: #ff9900; color: white; font-weight: bold; padding: 10px 18px; border-radius: 8px; border: none; cursor: pointer; transition: background 0.3s;">
+        Submit Review
+    </button>
+</form>
+
+
+ 
+
+
+
+{% endblock%}

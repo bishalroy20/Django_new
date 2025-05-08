@@ -1,0 +1,148 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block head_title %}sports site{% endblock %} {% block content %}
+<div class="container mx-auto flex flex-col md:flex-row items-center my-12 md:my-24">
+
+    
+    <div class="flex flex-col w-full lg:w-1/2 justify-center items-start pt-12 pb-24 px-6 bg-white rounded-2xl bg-opacity-70 mx-3">
+        <h1 class="font-bold text-4xl my-4">Welcome to sports hub</h1>
+        <p class="leading-normal mb-4">
+            This is a simple sports site where you can buy sports accessories. You can also create an account, login, logout. Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed nemo quaerat quo dicta, adipisci eum fuga ratione id numquam eius veniam placeat voluptatum, itaque tempora molestias vel, blanditiis fugiat ipsam!
+
+        </p>
+        <div class="flex justify-end w-full">
+            <a href="{%url 'register'%}" class="bg-blue-900 text-white rounded-none hover:bg-white hover:text-blue-900 hover:border-blue-900 shadow hover:shadow-lg py-2 px-4 border border-gray-900 hover:border-transparent">Register</a>
+        </div>
+    </div>
+    <!-- Right Section (Image) -->
+    <div class="m-auto flex flex-col w-full lg:w-1/2 justify-center items-center pt-12 pb-24 px-6 bg-white rounded-2xl bg-opacity-70 mx-3">
+        <img class="rounded-2xl shadow-lg" src="{% static 'image.png' %}" style="width: 400px; height: auto; object-fit: cover; border-radius: 15px;"/>
+    </div>
+</div>
+
+<input type="text" id="searchBox" placeholder="Search for a product..." 
+style="width: 100%; padding: 10px; border: 2px solid #ccc; border-radius: 5px;">
+
+<div id="searchResults" style="margin-top: 15px;"></div>
+
+
+<script>
+    // 🔍 Real-time Product Search
+    document.getElementById('searchBox').addEventListener('keyup', function() {
+        let query = this.value;
+
+        fetch("/search/?q=" + encodeURIComponent(query))
+        .then(response => response.json())
+        .then(data => {
+            let resultHTML = "";
+            data.forEach(product => {
+                resultHTML += `<div style='padding: 10px; border-bottom: 1px solid #ddd;'>
+                                   <strong>${product.name}</strong> - 💰 $${product.price}
+                                   <br><a href="/details/${product.id}/">View Details</a>
+                               </div>`;
+            });
+            document.getElementById('searchResults').innerHTML = resultHTML;
+        });
+    });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll(".category-link").forEach(function (label) {
+                label.addEventListener("click", function () {
+                    const categorySlug = this.dataset.category;
+        
+                    fetch(`/category/${categorySlug}/`)
+                        .then(response => response.json())
+                        .then(data => {
+                            let html = "";
+        
+                            if (data.length === 0) {
+                                html = "<p>No products found.</p>";
+                            } else {
+                                data.forEach(p => {
+                                    html += `
+                                        <div style="background: white; padding: 12px; border-radius: 10px; width: 30%; box-shadow: 0px 4px 8px rgba(0,0,0,0.2); margin-bottom: 5px;">
+                                            <img src="${p.image}" alt="${p.name}" style="width: 100%; height: 240px; object-fit: cover; border-radius: 10px 10px 0 0;">
+                                            <div style="text-align: center; padding: 8px;">
+                                                <h5>${p.name}</h5>
+                                                <p>${p.sport_name}</p>
+                                                <h4>💰 $${p.price}</h4>
+                                            </div>
+                                            <div style="text-align: center; margin-top: 8px;">
+                                                <a href="/details/${p.id}/" style="background-color: #007BFF; color: white; padding: 6px 12px; border-radius: 8px; text-decoration: none;">Details</a>
+                                            </div>
+                                        </div>
+                                    `;
+                                });
+                            }
+        
+                            // Replace product section (give your div an id="productContainer")
+                            document.getElementById("productContainer").innerHTML = html;
+                        })
+                        .catch(err => {
+                            console.error("Fetch error:", err);
+                        });
+                });
+            });
+        });
+        
+    
+</script> 
+    
+
+     <div style="display: flex; flex-wrap: wrap; gap: 10px; padding-top: 10px;">
+        <!-- Category Section (Left Side) -->
+        <div style="flex: 1; min-width: 220px; background: white; padding: 15px; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0,0,0,0.2);">
+            <h4 style="font-weight: bold; margin-bottom: 8px;">All Categories</h4>
+            {% for cate in category %}
+            <div style="margin-bottom: 8px;">
+                <input type="radio" name="category" id="{{ cate.id }}" style="margin-right: 5px;">
+                <label for="{{ cate.id }}" style="font-weight: bold; cursor: pointer;" class="category-link" data-category="{{ cate.slug }}">
+                    {{ cate.name }}
+                </label>
+            </div>
+            {% endfor %}
+            
+            <a href="{% url 'home' %}" style="background-color:rgb(0, 255, 68); color: white; font-weight: bold; padding: 6px 12px; border-radius: 8px; border: none; cursor: pointer; transition: background 0.3s; text-decoration: none; display: inline-block;">
+                Reset
+            </a>
+        </div>
+        
+        
+        
+    
+        <!-- Product Section (Right Side) -->
+        <div id="productContainer" style="flex: 3; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;">
+
+            {% for car in data %}
+            <div style="background: white; padding: 12px; border-radius: 10px; width: 30%; box-shadow: 0px 4px 8px rgba(0,0,0,0.2); transition: transform 0.3s; margin-bottom: 5px;">
+                <img src="{{ car.image.url }}" alt="{{ car.name }}" style="width: 100%; height: 240px; object-fit: cover; border-radius: 10px 10px 0 0;">
+                
+                <div style="text-align: center; padding: 8px;">
+                    <h5 style="color: black; font-weight: bold; margin-bottom: 4px;">{{ car.name }}</h5>
+                    <p style="color: gray; margin-bottom: 4px;">{{ car.sport_name }}</p>
+                    <h4 style="color: green;">💰 ${{ car.price }}</h4>
+                </div>
+    
+                <div style="text-align: center; margin-top: 8px;">
+                    {% comment %} {% if request.user.is_authenticated %}
+                    <button id='add_cart' style="background-color: #FFD700; color: #333; font-weight: bold; padding: 6px 12px; border-radius: 8px; border: none; cursor: pointer; transition: background 0.3s;">
+                        🛒 Add to Cart
+                    </button>
+                    {% endif %} {% endcomment %}
+                    <a href="{% url 'detailview' car.id %}" style="background-color: #007BFF; color: white; font-weight: bold; padding: 6px 12px; border-radius: 8px; border: none; cursor: pointer; transition: background 0.3s; text-decoration: none; display: inline-block;">
+                        Details
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div> 
+    
+   
+   
+    <br/><br/>
+
+{% endblock %}
+
+

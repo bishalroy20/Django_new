@@ -6,3 +6,4 @@ urlpatterns = [
     path('edit_author/<int:id>/' ,views.edit_author , name='edit_author'),
 ]
 
+
