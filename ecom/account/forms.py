@@ -6,6 +6,7 @@ from .models import UserAccount, UserAddress
 
 
 class UserRegistrationForm(UserCreationForm):
+    profile_picture = forms.ImageField(required=False)
     birth_date = forms.DateField(widget=forms.DateInput(attrs={'type':'date'}))
     gender = forms.ChoiceField(choices=GENDER_TYPE)
     street_address = forms.CharField(max_length=100)
@@ -14,7 +15,7 @@ class UserRegistrationForm(UserCreationForm):
     country = forms.CharField(max_length=100)
     class Meta:
         model = User
-        fields = ['username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'birth_date','gender', 'postal_code', 'city','country', 'street_address']
+        fields = ['profile_picture' ,'username', 'password1', 'password2', 'first_name', 'last_name', 'email', 'birth_date','gender', 'postal_code', 'city','country', 'street_address']
         
         # form.save()
     def save(self, commit=True):
@@ -27,6 +28,7 @@ class UserRegistrationForm(UserCreationForm):
             birth_date = self.cleaned_data.get('birth_date')
             city = self.cleaned_data.get('city')
             street_address = self.cleaned_data.get('street_address')
+            profile_picture = self.cleaned_data.get('profile_picture')
             
             UserAddress.objects.create(
                 user = our_user,
@@ -39,7 +41,8 @@ class UserRegistrationForm(UserCreationForm):
                 user = our_user,
                 gender = gender,
                 birth_date =birth_date,
-                account_no = 100000+ our_user.id
+                account_no = 100000+ our_user.id,
+                profile_picture=profile_picture ,
             )
         return our_user
     
@@ -62,6 +65,7 @@ class UserRegistrationForm(UserCreationForm):
 
 
 class UserUpdateForm(forms.ModelForm):
+    profile_picture = forms.ImageField(required=False) 
     gender = forms.ChoiceField(choices=GENDER_TYPE)
     birth_date = forms.DateField(widget=forms.DateInput(attrs={'type':'date'}))
     street_address = forms.CharField(max_length=100)
@@ -92,6 +96,7 @@ class UserUpdateForm(forms.ModelForm):
             if user_account:
                 self.fields['gender'].initial = user_account.gender
                 self.fields['birth_date'].initial = user_account.birth_date
+                self.fields['profile_picture'].initial = user_account.profile_picture  # Pre-fill profile picture
                 self.fields['street_address'].initial = user_address.street_address
                 self.fields['postal_code'].initial = user_address.postal_code
                 self.fields['country'].initial = user_address.country
@@ -105,6 +110,7 @@ class UserUpdateForm(forms.ModelForm):
 
                 user_account.gender = self.cleaned_data['gender']
                 user_account.birth_date = self.cleaned_data['birth_date']
+                user_account.profile_picture = self.cleaned_data['profile_picture']  # Update profile picture
                 user_account.save()
 
                 user_address.street_address = self.cleaned_data['street_address']

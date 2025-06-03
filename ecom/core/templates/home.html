@@ -1,0 +1,246 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head_title %}sports site{% endblock %}
+{% block content %}
+
+
+
+<!-- Carousel Section -->
+<section class="max-w-7xl mx-auto mt-8 px-4">
+    <div class="grid md:grid-cols-2 gap-6 items-center bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white rounded-xl p-6">
+        <div>
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">The Spirit of Sports</h2>
+            <p class="text-lg text-white-600 leading-relaxed">
+        Sports aren't just games — they are battles of will, tests of strength, and celebrations of teamwork.
+        Whether it's the crack of the bat on a cricket pitch, the roar of the crowd in a football stadium, or the speed and precision of a hockey match, sports bring us together.
+        
+    </p>
+        <br/> <br/>    
+            <a class="bg-white text-indigo-600 font-semibold px-6 py-2 rounded shadow hover:bg-gray-100 transition" href="{% url 'productlist' %}">
+            Buy Now
+        </a>
+
+        </div>
+        <img src="{% static 'sportsban.png' %}" alt="Headphone" class="w-full max-h-64 object-contain">
+    </div>
+</section>
+
+
+<br/><br/>
+<!-- Homepage Banner Section -->
+<section id="homepage-banner" class="relative w-full h-[450px]">
+    <div class="swiper bannerSwiper">
+        <div class="swiper-wrapper">
+            <!--Banner3-->
+           <div class="swiper-slide relative">
+                <img src="{% static 'banner3.png' %}" alt="Sports Event 1" class="w-full h-[60vh] sm:h-[80vh] object-cover">
+                
+                <div class="absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-50 text-white text-center px-4 sm:px-8">
+                    <h2 class="text-2xl sm:text-4xl font-bold">Experience the Thrill of Sports</h2>
+                    <p class="text-sm sm:text-lg mt-2 max-w-md">Stay updated with live events, scores, and exclusive insights.</p>
+                    <a href="/events" class="mt-4 bg-blue-600 px-4 sm:px-6 py-2 rounded-lg hover:bg-blue-700 transition">Explore Now</a>
+                </div>
+            </div>
+
+            <!-- Banner 1 -->
+            <div class="swiper-slide relative">
+                <img src="{% static 'banner1.png' %}" alt="Sports Event 1" class="w-full h-full object-cover">
+                <div class="absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-50 text-white text-center">
+                    <h2 class="text-4xl font-bold">Experience the Thrill of Sports</h2>
+                    <p class="text-lg mt-2">Stay updated with live events, scores, and exclusive insights.</p>
+                    <a href="/events" class="mt-4 bg-blue-600 px-6 py-2 rounded-lg hover:bg-blue-700 transition">Explore Now</a>
+                </div>
+            </div>
+
+            <!-- Banner 2 -->
+            <div class="swiper-slide relative">
+                <img src="{% static 'banner2.png' %}" alt="Top Athletes" class="w-full h-full object-cover">
+                <div class="absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-50 text-white text-center">
+                    <h2 class="text-4xl font-bold">Follow Your Favorite Athletes</h2>
+                    <p class="text-lg mt-2">Get exclusive updates on top players and teams.</p>
+                    <a href="/athletes" class="mt-4 bg-blue-600 px-6 py-2 rounded-lg hover:bg-blue-700 transition">Discover More</a>
+                </div>
+            </div>
+
+            <!-- Banner 3 -->
+            <div class="swiper-slide relative">
+                
+                <img src="{% static 'banner3.jpg' %}" alt="Live Matches" class="w-full h-full object-cover">
+                <div class="absolute inset-0 flex flex-col justify-center items-center bg-black bg-opacity-50 text-white text-center">
+                    <h2 class="text-4xl font-bold">Live Matches & Exclusive Coverage</h2>
+                    <p class="text-lg mt-2">Never miss a moment with our live match updates.</p>
+                    <a href="" class="mt-4 bg-blue-600 px-6 py-2 rounded-lg hover:bg-blue-700 transition">Watch Live</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Pagination & Navigation -->
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+</section>
+
+
+
+<!--services-->
+<div class="py-2 md:py-20   "><div class="max-w-7xl px-4 mx-auto"><h2 class="text-3xl font-medium text-center mb-16 text-green-500">Our Premium Services</h2><div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-6 lg:gap-12"><div class="border bg-card text-card-foreground group relative overflow-hidden rounded-xl shadow-xl transform transition-all duration-500 hover:scale-105"><div class="absolute inset-0 transition-colors duration-500 bg-green-600 group-hover:bg-white"></div><div class="absolute inset-0  transition-transform duration-500 transform group-hover:translate-y-full bg-green-600"></div><div class="flex-col space-y-1.5 p-6 flex items-center justify-center h-32 relative z-10"><div class="text-6xl text-white group-hover:text-green-600 transition-colors duration-500"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"></path></svg></div></div><div class="p-6 relative z-10 text-center px-6 py-8"><h3 class="text-3xl font-semibold mb-3 group-hover:text-green-600 transition-colors duration-500">Real-Time Availability</h3><p class="text-lg leading-relaxed text-gray-200 group-hover:text-gray-800 transition-colors duration-500">Know what's available at any moment.</p></div></div><div class="border bg-card text-card-foreground group relative overflow-hidden rounded-xl shadow-xl transform transition-all duration-500 hover:scale-105"><div class="absolute inset-0 transition-colors duration-500 bg-blue-600 group-hover:bg-white"></div><div class="absolute inset-0  transition-transform duration-500 transform group-hover:translate-y-full bg-blue-600"></div><div class="flex-col space-y-1.5 p-6 flex items-center justify-center h-32 relative z-10"><div class="text-6xl text-white group-hover:text-green-600 transition-colors duration-500"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 448 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M0 464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V192H0v272zm320-196c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM192 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM64 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zM400 64h-48V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H160V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H48C21.5 64 0 85.5 0 112v48h448v-48c0-26.5-21.5-48-48-48z"></path></svg></div></div><div class="p-6 relative z-10 text-center px-6 py-8"><h3 class="text-3xl font-semibold mb-3 group-hover:text-green-600 transition-colors duration-500">Instant Booking Confirmation</h3><p class="text-lg leading-relaxed text-gray-200 group-hover:text-gray-800 transition-colors duration-500">Book with confidence and get instant confirmation.</p></div></div><div class="border bg-card text-card-foreground group relative overflow-hidden rounded-xl shadow-xl transform transition-all duration-500 hover:scale-105"><div class="absolute inset-0 transition-colors duration-500 bg-yellow-600 group-hover:bg-white"></div><div class="absolute inset-0  transition-transform duration-500 transform group-hover:translate-y-full bg-yellow-600"></div><div class="flex-col space-y-1.5 p-6 flex items-center justify-center h-32 relative z-10"><div class="text-6xl text-white group-hover:text-green-600 transition-colors duration-500"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M256,8C119,8,8,119,8,256S119,504,256,504,504,393,504,256,393,8,256,8Zm92.49,313h0l-20,25a16,16,0,0,1-22.49,2.5h0l-67-49.72a40,40,0,0,1-15-31.23V112a16,16,0,0,1,16-16h32a16,16,0,0,1,16,16V256l58,42.5A16,16,0,0,1,348.49,321Z"></path></svg></div></div><div class="p-6 relative z-10 text-center px-6 py-8"><h3 class="text-3xl font-semibold mb-3 group-hover:text-green-600 transition-colors duration-500">Flexible Scheduling</h3><p class="text-lg leading-relaxed text-gray-200 group-hover:text-gray-800 transition-colors duration-500">Schedule at your convenience with flexible options.</p></div></div><div class="border bg-card text-card-foreground group relative overflow-hidden rounded-xl shadow-xl transform transition-all duration-500 hover:scale-105"><div class="absolute inset-0 transition-colors duration-500 bg-purple-600 group-hover:bg-white"></div><div class="absolute inset-0  transition-transform duration-500 transform group-hover:translate-y-full bg-purple-600"></div><div class="flex-col space-y-1.5 p-6 flex items-center justify-center h-32 relative z-10"><div class="text-6xl text-white group-hover:text-green-600 transition-colors duration-500"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M192 208c0-17.67-14.33-32-32-32h-16c-35.35 0-64 28.65-64 64v48c0 35.35 28.65 64 64 64h16c17.67 0 32-14.33 32-32V208zm176 144c35.35 0 64-28.65 64-64v-48c0-35.35-28.65-64-64-64h-16c-17.67 0-32 14.33-32 32v112c0 17.67 14.33 32 32 32h16zM256 0C113.18 0 4.58 118.83 0 256v16c0 8.84 7.16 16 16 16h16c8.84 0 16-7.16 16-16v-16c0-114.69 93.31-208 208-208s208 93.31 208 208h-.12c.08 2.43.12 165.72.12 165.72 0 23.35-18.93 42.28-42.28 42.28H320c0-26.51-21.49-48-48-48h-32c-26.51 0-48 21.49-48 48s21.49 48 48 48h181.72c49.86 0 90.28-40.42 90.28-90.28V256C507.42 118.83 398.82 0 256 0z"></path></svg></div></div><div class="p-6 relative z-10 text-center px-6 py-8"><h3 class="text-3xl font-semibold mb-3 group-hover:text-green-600 transition-colors duration-500">24/7 Support</h3><p class="text-lg leading-relaxed text-gray-200 group-hover:text-gray-800 transition-colors duration-500">We're here to help whenever you need us.</p></div></div></div></div></div>
+
+
+
+<!-- product Section -->
+<section id="shoes" class="max-w-7xl mx-auto px-4">
+    <h2 class="text-3xl font-bold mb-6">Top products</h2>
+    <div class="grid md:grid-cols-3 gap-6">
+        {% for car in data|slice:":6" %}
+        <div class="bg-white shadow-md rounded-xl overflow-hidden transition hover:shadow-xl">
+                <img src="{{ car.image.url }}" alt="{{ car.name }}"
+                    class="w-full h-48 object-cover">
+                <div class="p-4 text-center">
+                    <h5 class="text-lg font-bold text-gray-800">{{ car.name }}</h5>
+                    <p class="text-sm text-gray-500">{{ car.sport_name }}</p>
+                    <h4 class="text-green-600 font-semibold text-xl mt-2">💰 ৳{{ car.price }}</h4>
+                    <a href="{% url 'detailview' car.id %}"
+                        class="inline-block mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Details</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+
+<div> <a href="{% url 'productlist' %}" class="checkout-btn">See all Products</a></div>
+
+
+
+
+<!--review section-->
+
+<!-- Celebrity Reviews Section -->
+<section id="celebrity-reviews" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-center text-gray-800 mb-10">
+    Celebrity Reviews
+  </h2>
+
+  <!-- Swiper Carousel -->
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+
+      <!-- Celebrity 1 -->
+      <div class="swiper-slide bg-white shadow-lg rounded-xl p-6 sm:p-8 flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 text-center sm:text-left">
+        <img src="{% static 'ronaldo.jpg' %}" alt="Cristiano Ronaldo" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full shadow-md object-cover">
+        <div>
+          <h5 class="text-lg sm:text-xl font-bold text-gray-800">Cristiano Ronaldo</h5>
+          <p class="text-sm sm:text-md text-gray-600 italic mt-1">"Top-quality football gear! The precision and durability make every game better."</p>
+        </div>
+      </div>
+
+      <!-- Celebrity 2 -->
+      <div class="swiper-slide bg-white shadow-lg rounded-xl p-6 sm:p-8 flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 text-center sm:text-left">
+        <img src="{% static 'Messi.jpg' %}" alt="Lionel Messi" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full shadow-md object-cover">
+        <div>
+          <h5 class="text-lg sm:text-xl font-bold text-gray-800">Lionel Messi</h5>
+          <p class="text-sm sm:text-md text-gray-600 italic mt-1">"The football boots here give me the perfect grip and control. Highly recommended!"</p>
+        </div>
+      </div>
+
+      <!-- Celebrity 3 -->
+      <div class="swiper-slide bg-white shadow-lg rounded-xl p-6 sm:p-8 flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 text-center sm:text-left">
+        <img src="{% static 'virat.jpg' %}" alt="Virat Kohli" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full shadow-md object-cover">
+        <div>
+          <h5 class="text-lg sm:text-xl font-bold text-gray-800">Virat Kohli</h5>
+          <p class="text-sm sm:text-md text-gray-600 italic mt-1">"Cricket bats and accessories that truly enhance performance. A must-have for every aspiring cricketer!"</p>
+        </div>
+      </div>
+
+      <!-- Celebrity 4 -->
+      <div class="swiper-slide bg-white shadow-lg rounded-xl p-6 sm:p-8 flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 text-center sm:text-left">
+        <img src="{% static 'msd.jpg' %}" alt="Ms Dhoni" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full shadow-md object-cover">
+        <div>
+          <h5 class="text-lg sm:text-xl font-bold text-gray-800">Ms Dhoni</h5>
+          <p class="text-sm sm:text-md text-gray-600 italic mt-1">"Perfect site for sports lovers worldwide. From gloves to helmets, this store has everything a cricketer needs!"</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Navigation & Pagination -->
+    <div class="swiper-pagination mt-6"></div>
+    <div class="swiper-button-prev hidden sm:block"></div>
+    <div class="swiper-button-next hidden sm:block"></div>
+  </div>
+</section>
+
+
+
+
+
+
+<!-- Subscribe Section -->
+<section id="subscribe" class="bg-gradient-to-r from-cyan-400 to-blue-500 text-white py-16">
+    <div class="max-w-xl mx-auto text-center px-4">
+        <h1 class="text-3xl md:text-4xl font-bold mb-2">LET'S STAY IN TOUCH</h1>
+        <p class="mb-6">Get updates on sales, specials and more</p>
+        <div class="flex flex-col sm:flex-row items-center gap-4">
+            <input type="email" placeholder="Your Email"
+                class="flex-grow px-4 py-2 rounded text-gray-800 w-full">
+            <button class="bg-white text-blue-600 px-6 py-2 rounded font-semibold hover:bg-gray-100 transition">
+                SUBMIT
+            </button>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+<!-- Mobile Menu Toggle Script -->
+<script>
+ 
+    
+    var swiper = new Swiper(".bannerSwiper", {
+        spaceBetween: 30,
+        effect: "slide",
+        centeredSlides: true,
+        autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+
+    var swiper = new Swiper(".mySwiper", {
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: {
+            delay: 3000,
+            disableOnInteraction: false,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+
+    document.getElementById("navToggle").addEventListener("click", function () {
+        const menu = document.getElementById("navMenu");
+        menu.classList.toggle("hidden");
+    });
+</script>
+
+{% endblock %}

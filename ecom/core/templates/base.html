@@ -10,13 +10,14 @@
         </title>
         <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+        
+
         {% block head_extra %}{% endblock %}
         <style>
-            footer {
-                position: fixed !important;
-                bottom: 0 !important;
-                width: 100%;
-            }
+            
 
             .navbar {
                 display: flex;
@@ -140,8 +141,8 @@
                 {% block content %}
                 {% endblock %}
             </div>
-            {% include 'footer.html' %}
-
+    
+        {% include 'footer.html'%}
         {% endblock %}
 
         

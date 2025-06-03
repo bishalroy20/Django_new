@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path , include
-from core.views import home , CarDetailView , search_products , filter_by_category
+from core.views import home , CarDetailView , search_products , filter_by_category , productlist , contact
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -24,8 +24,11 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home , name='home'),
+    path('contact/', contact , name='contact'),
+    path('productlist/', productlist , name='productlist'),
     path('account/',include('account.urls')),
     path('cart/',include('cart.urls')),
+    path('',include('payment.urls')),
     path('category/<slug:category_slug>/', filter_by_category, name='brand_wise'),
     path('details/<int:id>/', CarDetailView.as_view() , name='detailview'),
     path('search/', search_products, name='search_products'),
@@ -33,3 +36,4 @@ urlpatterns = [
 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

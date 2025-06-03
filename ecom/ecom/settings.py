@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     'account',
     'cart',
+    'payment',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -140,3 +141,12 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# settings.py
+
+SSLCOMMERZ_SETTINGS = {
+    'store_id': 'sport681c975fecf35',
+    'store_pass': 'sport681c975fecf35@ssl',
+    'issandbox': True  # Set to False in production
+}

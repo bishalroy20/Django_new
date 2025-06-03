@@ -10,6 +10,7 @@ class UserAccount(models.Model):
     account_no = models.IntegerField(unique=True) # account no duijon user er kokhono same hobe na
     birth_date = models.DateField(null=True, blank=True)
     gender = models.CharField(max_length=10, choices=GENDER_TYPE)
+    profile_picture = models.ImageField(upload_to='images/', null=True, blank=True)  # Upload field
 
     def __str__(self):
         return f"Account No: {self.account_no}"

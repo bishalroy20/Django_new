@@ -16,6 +16,16 @@
     <div class="w-full mt-10">
         <form method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
             {% csrf_token %} {% for hidden_field in form.hidden_fields %} {{ hidden_field.errors }} {{ hidden_field }} {% endfor %}
+            <div class="text-center mb-6">
+    {% if request.user.account.profile_picture %}
+        <img src="{{ request.user.account.profile_picture.url }}" alt="Profile Picture"
+             class="w-32 h-32 rounded-full border-4 border-gray-300 object-cover">
+    {% else %}
+        <p class="text-gray-600">No profile picture uploaded.</p>
+    {% endif %}
+</div>
+
+           
             <div class="flex flex-wrap -mx-3 mb-6">
                 <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.first_name.id_for_label }}">

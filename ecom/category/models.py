@@ -9,3 +9,5 @@ class Sport(models.Model):
     def __str__(self):
         return self.name
     
+
+# class Touch_mail(models.Model):

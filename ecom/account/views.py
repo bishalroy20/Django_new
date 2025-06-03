@@ -12,16 +12,25 @@ class UserRegistrationView(FormView):
     success_url = reverse_lazy('profile')
     
     def form_valid(self,form):
-        print(form.cleaned_data)
+        # print(form.cleaned_data)
         user = form.save()
+        
         login(self.request, user)
-        # print(user)
+        messages.success(self.request, "Account created successfully!")
         return super().form_valid(form) # form_valid function call hobe jodi sob thik thake
-
+    
+    def form_invalid(self, form):
+        for field, errors in form.errors.items():
+            for error in errors:
+                messages.error(self.request, f"{field}: {error}")  # Display field-specific errors
+        return super().form_invalid(form)
    
     
 class UserLoginView(LoginView):
     template_name = 'account/user_login.html'
+    def form_valid(self, form):
+        messages.info(self.request, "Log in Successfully")  
+        return super().form_valid(form)
     def get_success_url(self):
         return reverse_lazy('profile')
 

@@ -1,0 +1,143 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block head_title %}All Product List{% endblock %} {% block content %}
+<br/> <br/>
+<input type="text" id="searchBox" placeholder="Search for a product..." 
+style="width: 100%; padding: 10px; border: 2px solid #ccc; border-radius: 5px;">
+
+<div id="searchResults" style="margin-top: 15px;"></div>
+
+
+ <script>
+    // 🔍 Real-time Product Search
+    document.getElementById('searchBox').addEventListener('keyup', function() {
+        let query = this.value;
+
+        fetch("/search/?q=" + encodeURIComponent(query))
+        .then(response => response.json())
+        .then(data => {
+            let resultHTML = "";
+            data.forEach(product => {
+                resultHTML += `<div style='padding: 10px; border-bottom: 1px solid #ddd;'>
+                                   <strong>${product.name}</strong> - 💰 $${product.price}
+                                   <br><a href="/details/${product.id}/">View Details</a>
+                               </div>`;
+            });
+            document.getElementById('searchResults').innerHTML = resultHTML;
+        });
+
+        
+    });
+
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll(".category-link").forEach(function (label) {
+            label.addEventListener("click", function () {
+                const categorySlug = this.dataset.category;
+
+                fetch(`/category/${categorySlug}/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        let html = "";
+
+                        if (data.length === 0) {
+                            html = `<p class="text-center text-gray-500 text-lg">No products found.</p>`;
+                        } else {
+                            html = `<div class="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">`;
+
+                            data.forEach(p => {
+                                html += `
+                                    <div class="bg-white shadow-md rounded-xl overflow-hidden transition hover:shadow-xl">
+                                        <img src="${p.image}" alt="${p.name}" class="w-full h-48 object-cover">
+                                        <div class="p-4 text-center">
+                                            <h5 class="text-lg font-bold text-gray-800">${p.name}</h5>
+                                            <p class="text-sm text-gray-500">${p.sport_name}</p>
+                                            <h4 class="text-green-600 font-semibold text-xl mt-2">💰 $${p.price}</h4>
+                                            <a href="/details/${p.id}/" class="inline-block mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                                                Details
+                                            </a>
+                                        </div>
+                                    </div>`;
+                            });
+
+                            html += `</div>`;
+                        }
+
+                        document.getElementById("productContainer").innerHTML = html;
+                        document.getElementById('searchResults').innerHTML = '';
+                    })
+                    .catch(err => {
+                        console.error("Fetch error:", err);
+                    });
+            });
+        });
+    }); 
+    
+    
+    //sort cards
+    
+</script>  
+
+
+
+
+   <div class="max-w-7xl mx-auto px-4 py-8">
+    <!-- Search + Sort -->
+    <div class="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+      
+        <select id="sortPrice" class="px-4 py-2 rounded border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            <option value="default">Sort by</option>
+            <option value="asc">Price: Low to High</option>
+            <option value="desc">Price: High to Low</option>
+        </select>
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-6">
+        <!-- Sidebar: Categories -->
+        <aside class="bg-white shadow rounded-lg p-4 w-full lg:w-1/4">
+            <h3 class="text-lg font-semibold mb-4">All Categories</h3>
+            <div class="space-y-3">
+                {% for cate in category %}
+                <div>
+                    <input type="radio" name="category" id="{{ cate.id }}" class="mr-2">
+                    <label for="{{ cate.id }}" class="cursor-pointer font-medium category-link text-gray-700 hover:text-blue-600"
+                        data-category="{{ cate.slug }}">{{ cate.name }}</label>
+                </div>
+                {% endfor %}
+            </div>
+            <a href="{% url 'productlist' %}" class="mt-4 inline-block bg-green-500 text-white px-4 py-2 rounded font-semibold hover:bg-green-600 transition">
+                Reset Filters
+            </a>
+        </aside>
+
+        <!-- Products Grid -->
+    <section id="productContainer" class="max-w-7xl mx-auto px-4">
+            
+    <div class="grid md:grid-cols-3 gap-6">
+        {% for car in data %}
+        <div class="bg-white shadow-md rounded-xl overflow-hidden transition hover:shadow-xl">
+                <img src="{{ car.image.url }}" alt="{{ car.name }}"
+                    class="w-full h-48 object-cover">
+                <div class="p-4 text-center">
+                    <h5 class="text-lg font-bold text-gray-800">{{ car.name }}</h5>
+                    <p class="text-sm text-gray-500">{{ car.sport_name }}</p>
+                    <h4 class="text-green-600 font-semibold text-xl mt-2">💰 ৳{{ car.price }}</h4>
+                    <a href="{% url 'detailview' car.id %}"
+                        class="inline-block mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Details</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+        </section>
+    </div>
+</div>
+
+    
+   
+   
+    <br/><br/>
+
+{% endblock %}

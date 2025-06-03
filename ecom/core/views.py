@@ -7,6 +7,21 @@ from django.views.generic import DetailView
 from django.http import JsonResponse
 # Create your views here.
 
+
+def productlist(request , category_slug=None):
+    data = Product.objects.all()  
+    brand_category = None 
+
+    if category_slug:
+        brand_category = Sport.objects.get(slug=category_slug) 
+        data = Product.objects.filter(sport_name=brand_category)  # Corrected field name
+
+    categories = Sport.objects.all()  
+    
+    return render(request, 'productlist.html', {'data': data, 'category': categories, 'brand_category': brand_category})
+
+
+
 def home(request, category_slug=None):
     data = Product.objects.all()  
     brand_category = None 
@@ -17,7 +32,7 @@ def home(request, category_slug=None):
 
     categories = Sport.objects.all()  
     
-    return render(request, 'homepage.html', {'data': data, 'category': categories, 'brand_category': brand_category})
+    return render(request, 'home.html', {'data': data, 'category': categories, 'brand_category': brand_category})
 
 
 
@@ -83,3 +98,6 @@ def search_products(request):
     data = [{"id": p.id, "name": p.name, "price": str(p.price)} for p in products]  # Ensure name & price are included
     return JsonResponse(data, safe=False)
 
+
+def contact(request):
+    return render(request , 'contact.html')
